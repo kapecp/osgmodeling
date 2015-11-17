@@ -37,12 +37,12 @@ public:
     {
         for ( unsigned int i=0; i<geode.getNumDrawables(); ++i )
         {
-            osg::Geometry* geom = dynamic_cast<osg::Geometry*>( geode.getDrawable(i) );
+            GEOMETRY_FIX* geom = dynamic_cast<GEOMETRY_FIX*>( geode.getDrawable(i) );
             if ( geom ) processBsp( *geom, i );
         }
     }
 
-    void processBsp( osg::Geometry& geoset, unsigned int pos )
+    void processBsp( GEOMETRY_FIX& geoset, unsigned int pos )
     {
         int maxDepth=0, numPosNode=0, numNegNode=0;
         std::cout << "===== BSP construction of geometry ";

@@ -37,7 +37,7 @@ public:
     virtual ~TexCoordVisitor();
 
     /** Create texture coordinates for geometry. */
-    static void buildTexCoord( osg::Geometry& geoset );
+    static void buildTexCoord( GEOMETRY_FIX& geoset );
 
     virtual void apply( osg::Geode& geode );
 };

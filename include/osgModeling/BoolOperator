@@ -50,10 +50,10 @@ public:
     void setOperands( Model* model1, Model* model2 );
 
     /** calculate the result geometry and output it. */
-    bool output( osg::Geometry* result );
+    bool output( GEOMETRY_FIX* result );
 
     /** Convert a face list to a geometry. User may get new models from a changed face list in bool operations, etc. */
-    static bool convertFacesToGeometry( FaceList faces, osg::Geometry* geom );
+    static bool convertFacesToGeometry( FaceList faces, GEOMETRY_FIX* geom );
 
     /** Triangulate a face into a triangle list. */
     static void triangulate( BspFace face, osg::Vec3 normal, FaceList& flist );

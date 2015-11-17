@@ -57,7 +57,7 @@ struct CalcNormalFunctor
             double t = normal * _lastNormalRecorder[pos];
             if ( _threshold<1.0f )
             {
-                if ( !equivalent(_lastNormalRecorder[pos], osg::Vec3(0.0f,0.0f,0.0f)) 
+                if ( !equivalent(_lastNormalRecorder[pos], osg::Vec3(0.0f,0.0f,0.0f))
                     && t<_threshold && t>-_threshold )
                     continue;
             }
@@ -122,7 +122,7 @@ struct CalcNormalFunctor
         default:
             break;
         }
-        
+
         osg::Vec3 normal = (v2-v1)^(v3-v1) * (_flip?-1.0f:1.0f);
         incNormal( v1, normal, w[0] );
         incNormal( v2, normal, w[1] );
@@ -142,10 +142,10 @@ NormalVisitor::~NormalVisitor()
 {
 }
 
-bool NormalVisitor::checkPrimitives( osg::Geometry& geom )
+bool NormalVisitor::checkPrimitives( GEOMETRY_FIX& geom )
 {
-    osg::Geometry::PrimitiveSetList& primitives = geom.getPrimitiveSetList();
-    osg::Geometry::PrimitiveSetList::iterator itr;
+    GEOMETRY_FIX::PrimitiveSetList& primitives = geom.getPrimitiveSetList();
+    GEOMETRY_FIX::PrimitiveSetList::iterator itr;
     unsigned int numSurfacePrimitives=0;
     for ( itr=primitives.begin(); itr!=primitives.end(); ++itr )
     {
@@ -168,7 +168,7 @@ bool NormalVisitor::checkPrimitives( osg::Geometry& geom )
     return true;
 }
 
-void NormalVisitor::buildNormal( osg::Geometry& geom, bool flip, int method, double threshold )
+void NormalVisitor::buildNormal( GEOMETRY_FIX& geom, bool flip, int method, double threshold )
 {
     if ( !checkPrimitives(geom) ) return;
 
@@ -194,14 +194,14 @@ void NormalVisitor::buildNormal( osg::Geometry& geom, bool flip, int method, dou
 
     geom.setNormalArray( normals );
     geom.setNormalIndices( geom.getVertexIndices() );
-    geom.setNormalBinding( osg::Geometry::BIND_PER_VERTEX );
+    geom.setNormalBinding( GEOMETRY_FIX::BIND_PER_VERTEX );
 }
 
 void NormalVisitor::apply(osg::Geode& geode)
 {
     for(unsigned int i = 0; i < geode.getNumDrawables(); i++ )
     {
-      osg::Geometry* geom = dynamic_cast<osg::Geometry*>( geode.getDrawable(i) );
+      GEOMETRY_FIX* geom = dynamic_cast<GEOMETRY_FIX*>( geode.getDrawable(i) );
       if ( geom ) buildNormal( *geom, _flip, _method, _threshold );
     }
 }

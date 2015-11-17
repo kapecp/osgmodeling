@@ -58,7 +58,7 @@ void BoolOperator::setOperands( Model* model1, Model* model2 )
     setOperands( model1->getBspTree(), model2->getBspTree() );
 }
 
-bool BoolOperator::output( osg::Geometry* result )
+bool BoolOperator::output( GEOMETRY_FIX* result )
 {
     if ( !_operand1 || !_operand2 ) return false;
     if ( !_operand1->getRoot() || !_operand2->getRoot() ) return false;
@@ -129,7 +129,7 @@ bool BoolOperator::output( osg::Geometry* result )
     return true;
 }
 
-bool BoolOperator::convertFacesToGeometry( FaceList faces, osg::Geometry* geom )
+bool BoolOperator::convertFacesToGeometry( FaceList faces, GEOMETRY_FIX* geom )
 {
     if ( !faces.size() || !geom ) return false;
     std::map<osg::Vec3, unsigned int> verticesMap;

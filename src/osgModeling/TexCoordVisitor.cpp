@@ -35,7 +35,7 @@ void TexCoordVisitor::apply(osg::Geode& geode)
 {
     for(unsigned int i = 0; i < geode.getNumDrawables(); i++ )
     {
-    	osg::Geometry* geom = dynamic_cast<osg::Geometry*>( geode.getDrawable(i) );
+    	GEOMETRY_FIX* geom = dynamic_cast<GEOMETRY_FIX*>( geode.getDrawable(i) );
       if ( geom )
       {
       	// To do
