@@ -14,17 +14,7 @@ SET(SOURCES
 )
 
 ADD_LIBRARY(${LIB_NAME} SHARED ${SOURCES})
-SET_TARGET_PROPERTIES(${LIB_NAME} PROPERTIES DEBUG_POSTFIX ${OSG_DEBUG_POSTFIX})
-TARGET_LINK_LIBRARIES(${LIB_NAME}
-    debug osg${OSG_DEBUG_POSTFIX}         optimized osg
-    debug osgUtil${OSG_DEBUG_POSTFIX}     optimized osgUtil
-    debug osgViewer${OSG_DEBUG_POSTFIX}   optimized osgViewer
-    debug osgText${OSG_DEBUG_POSTFIX}     optimized osgText
-    debug osgDB${OSG_DEBUG_POSTFIX}       optimized osgDB
-    debug osgGA${OSG_DEBUG_POSTFIX}       optimized osgGA
-    debug OpenThreads${OSG_DEBUG_POSTFIX} optimized OpenThreads
-    debug osgModeling${OSG_DEBUG_POSTFIX} optimized osgModeling
-)
+TARGET_LINK_LIBRARIES(${LIB_NAME} osgModeling ${OPENSCENEGRAPH_LIBRARIES} )
 
 SET(INSTALL_BINDIR bin)
 IF(WIN32)

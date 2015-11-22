@@ -20,7 +20,6 @@
 PROJECT(osgModeling)
 SET(PROJECT_NAME osgModeling)
 
-SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules/")
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4.7)
 
 IF(COMMAND cmake_policy)
@@ -32,10 +31,16 @@ SET(OSGMODELING_MINOR_VERSION 1)
 SET(OSGMODELING_PATCH_VERSION 1)
 SET(OSGMODELING_VERSION ${OSGMODELING_MAJOR_VERSION}.${OSGMODELING_MINOR_VERSION}.${OSGMODELING_PATCH_VERSION})
 
-FIND_PACKAGE(OpenSceneGraph)
+find_package( OpenSceneGraph COMPONENTS
+    osg
+    osgUtil
+    osgViewer
+    osgText
+    osgDB
+    osgGA
+    OpenThreads
+ )
 FIND_PACKAGE(Doxygen)
-
-SET(OSG_DEBUG_POSTFIX "d" CACHE STRING "use postfix to link with osg with debug")
 
 IF(WIN32)
     IF(MSVC)
@@ -51,15 +56,11 @@ IF(WIN32)
     ENDIF(MSVC)
 ENDIF(WIN32)
 
-SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} CACHE STRING "You may add additional search paths here. Use ; to separate multiple paths.")
-SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} CACHE STRING "You may add additional search paths here. Use ; to separate multiple paths.")
-
 IF (NOT WIN32)
     SET(CMAKE_CXX_FLAGS "-W -Wall -Wno-unused")
 ENDIF(NOT WIN32)
 
-INCLUDE_DIRECTORIES(include ${CMAKE_INCLUDE_PATH} ${OPENSCENEGRAPH_INCLUDE_DIR})
-LINK_DIRECTORIES(${CMAKE_LIBRARY_PATH} ${OPENSCENEGRAPH_LIB_DIR})
+INCLUDE_DIRECTORIES(include ${OPENSCENEGRAPH_INCLUDE_DIRS})
 
 ADD_SUBDIRECTORY(src/osgModeling)
 
@@ -83,7 +84,7 @@ IF(BUILD_DOCUMENTATION)
     OPTION(BUILD_HTMLHELP "Also build HTML help file (.chm)" OFF)
     IF(BUILD_HTMLHELP)
         SET(GENERATE_HTMLHELP YES)
-        
+
         FIND_PROGRAM(HHC_FILE hhc.exe
           PATHS
           $ENV{PATH}
@@ -97,7 +98,7 @@ IF(BUILD_DOCUMENTATION)
     ELSE(DOT)
         SET(HAVE_DOT NO)
     ENDIF(DOT)
-    
+
     CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/doc/Doxyfiles/doxyfile.cmake
         ${PROJECT_BINARY_DIR}/doc/doxyfile
     )

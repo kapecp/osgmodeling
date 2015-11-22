@@ -193,7 +193,7 @@ void NormalVisitor::buildNormal( GEOMETRY_FIX& geom, bool flip, int method, doub
     }
 
     geom.setNormalArray( normals );
-    geom.setNormalIndices( geom.getVertexIndices() );
+    geom.setNormalIndices( const_cast<osg::IndexArray*>(geom.getVertexIndices()) );
     geom.setNormalBinding( GEOMETRY_FIX::BIND_PER_VERTEX );
 }
 
