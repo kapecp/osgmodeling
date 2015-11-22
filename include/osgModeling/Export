@@ -77,4 +77,13 @@
     #define VECTOR std::vector
 #endif
 
+/* Define this for compatibility - fix problems with deprecated functionality in osg::Geometry class */
+#if (OPENSCENEGRAPH_MAJOR_VERSION>=3 && OPENSCENEGRAPH_MINOR_VERSION>=2)
+    // use deprecated_osg::Geometry in OSG v3.2 and newer
+    #define GEOMETRY_FIX deprecated_osg::Geometry
+#else
+    // use osg::Geometry in OSG version older than 3.2
+    #define GEOMETRY_FIX osg::Geometry
+#endif
+
 #endif

@@ -26,7 +26,7 @@
 #include <osgModeling/Nurbs>
 #include <osgModeling/BoolOperator>
 
-osg::ref_ptr<osg::Geometry> createFirstOperator()
+osg::ref_ptr<GEOMETRY_FIX> createFirstOperator()
 {
 #if 0
     osg::ref_ptr<osgModeling::Curve> profile = new osgModeling::Curve;
@@ -55,7 +55,7 @@ osg::ref_ptr<osg::Geometry> createFirstOperator()
     return geom.get();
 }
 
-osg::ref_ptr<osg::Geometry> createSecondOperator()
+osg::ref_ptr<GEOMETRY_FIX> createSecondOperator()
 {
 #if 1
     double r = 0.5f;
@@ -102,10 +102,10 @@ osg::ref_ptr<osg::Node> createBoolean()
 
     // Calculate and output the result into a new geometry.
     // Be careful, it may cost long time or even crash if you input a too complex model.
-    osg::ref_ptr<osg::Geometry> result = new osg::Geometry;
+    osg::ref_ptr<GEOMETRY_FIX> result = new GEOMETRY_FIX;
     boolOp->output( result.get() );
-    
-    // A triangle strip generator should be used here, otherwise too many independent triangles may cause the graphics system crash. 
+
+    // A triangle strip generator should be used here, otherwise too many independent triangles may cause the graphics system crash.
     osgUtil::TriStripVisitor tsv;
     tsv.stripify( *result );
 

@@ -43,17 +43,9 @@ SET(SOURCES
 )
 
 ADD_DEFINITIONS(-DOSGMODELING_LIBRARY)
+
 ADD_LIBRARY(${LIB_NAME} SHARED ${HEADERS} ${SOURCES})
-SET_TARGET_PROPERTIES(${LIB_NAME} PROPERTIES DEBUG_POSTFIX ${OSG_DEBUG_POSTFIX})
-TARGET_LINK_LIBRARIES(${LIB_NAME}
-    debug osg${OSG_DEBUG_POSTFIX}         optimized osg
-    debug osgUtil${OSG_DEBUG_POSTFIX}     optimized osgUtil
-    debug osgViewer${OSG_DEBUG_POSTFIX}   optimized osgViewer
-    debug osgText${OSG_DEBUG_POSTFIX}     optimized osgText
-    debug osgDB${OSG_DEBUG_POSTFIX}       optimized osgDB
-    debug osgGA${OSG_DEBUG_POSTFIX}       optimized osgGA
-    debug OpenThreads${OSG_DEBUG_POSTFIX} optimized OpenThreads
-)
+TARGET_LINK_LIBRARIES(${LIB_NAME} ${OPENSCENEGRAPH_LIBRARIES})
 
 SET(HEADERS_GROUP "Header Files")
 SOURCE_GROUP(

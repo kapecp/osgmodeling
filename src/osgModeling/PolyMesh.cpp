@@ -93,18 +93,18 @@ osg::Vec3 PolyMesh::Face::operator-( PolyMesh::Edge e )
 }
 
 PolyMesh::PolyMesh():
-    osg::Geometry()
+    GEOMETRY_FIX()
 {
 }
 
-PolyMesh::PolyMesh( const osg::Geometry& copy, const osg::CopyOp& copyop ):
-    osg::Geometry(copy,copyop)
+PolyMesh::PolyMesh( const GEOMETRY_FIX& copy, const osg::CopyOp& copyop ):
+    GEOMETRY_FIX(copy,copyop)
 {
     ModelVisitor::buildMesh( *this );
 }
 
 PolyMesh::PolyMesh( const PolyMesh& copy, const osg::CopyOp& copyop ):
-    osg::Geometry(copy,copyop),
+    GEOMETRY_FIX(copy,copyop),
     _edges(copy._edges), _faces(copy._faces)
 {
 }
@@ -222,7 +222,7 @@ void PolyMesh::findNeighbors( Face* f, FaceList& flist )
     {
         Edge* edge = getEdge( (*f)[i%size], (*f)[(i+1)%size], _edges );
         if ( !edge ) continue;
-        
+
         for ( FaceList::iterator itr=edge->_faces.begin();
             itr!=edge->_faces.end();
             ++itr )
@@ -233,7 +233,7 @@ void PolyMesh::findNeighbors( Face* f, FaceList& flist )
     }
 }
 
-bool PolyMesh::convertFacesToGeometry( FaceList faces, osg::Geometry* geom )
+bool PolyMesh::convertFacesToGeometry( FaceList faces, GEOMETRY_FIX* geom )
 {
     if ( !faces.size() || !geom ) return false;
 

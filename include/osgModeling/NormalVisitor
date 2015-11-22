@@ -60,12 +60,12 @@ public:
     inline double getThreshold() const { return _threshold; }
 
     /** Create normals for geometry. */
-    static void buildNormal( osg::Geometry& geoset, bool flip=false, int method=MWE, double threshold=1e-6 );
+    static void buildNormal( GEOMETRY_FIX& geoset, bool flip=false, int method=MWE, double threshold=1e-6 );
 
     virtual void apply( osg::Geode& geode );
 
 protected:
-    static bool checkPrimitives( osg::Geometry& geom );
+    static bool checkPrimitives( GEOMETRY_FIX& geom );
 
     double _threshold;
     int _method;

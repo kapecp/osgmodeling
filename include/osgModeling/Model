@@ -31,7 +31,7 @@ namespace osgModeling {
 /** Modeling base class
  * This is the base class of all osgModeling models.
  */
-class OSGMODELING_EXPORT Model : public osg::Geometry
+class OSGMODELING_EXPORT Model : public GEOMETRY_FIX
 {
 public:
     enum GenerateParts { CAP1_PART=0x1, BODY_PART=0x2, CAP2_PART=0x4, ALL_PARTS=CAP1_PART|BODY_PART|CAP2_PART };
@@ -39,21 +39,21 @@ public:
     enum AuxFunctions { FLIP_NORMAL=0x1, USE_WIREFRAME=0x2 };
 
     Model():
-        osg::Geometry(),
+        GEOMETRY_FIX(),
         _updated(false), _partsToGenerate(BODY_PART), _coordsToGenerate(ALL_COORDS), _funcs(0),
         _algorithmCallback(0), _normalGenerator(0), _texCoordGenerator(0), _bspTree(0)
     {
     }
 
-    Model( const osg::Geometry& copy, const osg::CopyOp& copyop=osg::CopyOp::SHALLOW_COPY ):
-        osg::Geometry(copy,copyop),
+    Model( const GEOMETRY_FIX& copy, const osg::CopyOp& copyop=osg::CopyOp::SHALLOW_COPY ):
+        GEOMETRY_FIX(copy,copyop),
         _updated(true), _funcs(0), _algorithmCallback(0),
         _normalGenerator(0), _texCoordGenerator(0), _bspTree(0)
     {
     }
 
     Model( const Model& copy, const osg::CopyOp& copyop=osg::CopyOp::SHALLOW_COPY ):
-        osg::Geometry(copy,copyop),
+        GEOMETRY_FIX(copy,copyop),
         _updated(copy._updated), _partsToGenerate(copy._partsToGenerate), _coordsToGenerate(copy._coordsToGenerate),
         _funcs(copy._funcs), _algorithmCallback(copy._algorithmCallback), _normalGenerator(copy._normalGenerator),
         _texCoordGenerator(copy._texCoordGenerator), _bspTree(copy._bspTree)
@@ -136,7 +136,7 @@ public:
         if ( !_updated )
             osg::notify(osg::WARN) << "osgModeling::" << className() << ": Call update() to update changed models." <<std::endl;
 
-        osg::Geometry::drawImplementation( renderInfo );
+        GEOMETRY_FIX::drawImplementation( renderInfo );
     }
 
 protected:

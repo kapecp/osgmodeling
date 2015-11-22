@@ -43,7 +43,7 @@ osg::ref_ptr<osg::Geode> createSubd( osg::Drawable* drawable, int method, int le
     std::cout << "*** Constructing the polygon mesh ..." << std::endl;
     osg::Timer_t t1 = osg::Timer::instance()->tick();
 
-    osg::Geometry* geom = dynamic_cast<osg::Geometry*>( drawable );
+    GEOMETRY_FIX* geom = dynamic_cast<GEOMETRY_FIX*>( drawable );
     osg::ref_ptr<osgModeling::PolyMesh> mesh = new osgModeling::PolyMesh( *geom );
     geode->addDrawable( mesh.get() );
 

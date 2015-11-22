@@ -79,7 +79,7 @@ struct CalcTriangleFunctor
             g3=_coordSet.equal_range(&v3);
         buildEdge( g1, g2, face );
         buildEdge( g2, g3, face );
-        buildEdge( g3, g1, face ); 
+        buildEdge( g3, g1, face );
     }
 
     // BSP faces building variables & functions.
@@ -111,7 +111,7 @@ struct CalcTriangleFunctor
     {
         if ( treatVertexDataAsTemporary || v1==v2 || v1==v3 || v2==v3 )
             return;
-        
+
         if ( _task==ModelVisitor::BUILD_MESH )
         {
             buildMesh( v1, v2, v3 );
@@ -141,10 +141,10 @@ ModelVisitor::~ModelVisitor()
 {
 }
 
-bool ModelVisitor::checkPrimitives( osg::Geometry& geom )
+bool ModelVisitor::checkPrimitives( GEOMETRY_FIX& geom )
 {
-    osg::Geometry::PrimitiveSetList& primitives = geom.getPrimitiveSetList();
-    osg::Geometry::PrimitiveSetList::iterator itr;
+    GEOMETRY_FIX::PrimitiveSetList& primitives = geom.getPrimitiveSetList();
+    GEOMETRY_FIX::PrimitiveSetList::iterator itr;
     unsigned int numSurfacePrimitives=0;
     for ( itr=primitives.begin(); itr!=primitives.end(); ++itr )
     {
