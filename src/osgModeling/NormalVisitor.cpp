@@ -86,7 +86,7 @@ struct CalcNormalFunctor
         }
     }
 
-    inline void operator() ( const osg::Vec3& v1, const osg::Vec3& v2, const osg::Vec3& v3, bool treatVertexDataAsTemporary )
+    inline void operator() ( const osg::Vec3& v1, const osg::Vec3& v2, const osg::Vec3& v3, bool treatVertexDataAsTemporary = false )
     {
         if ( treatVertexDataAsTemporary || v1==v2 || v1==v3 || v2==v3 )
             return;
